@@ -16,7 +16,7 @@ namespace TicTacToe {
 
         bool firstShag = true;
 
-        int R = 0;
+        int FieldSize;
         Field field;
 
         char curPlayer = 'X';
@@ -25,15 +25,16 @@ namespace TicTacToe {
         Button[,] B;
         int sb = 50;
         int sl = 5;
+        
         public TicTacToe(int size) {
-            R = size;
-            B = new Button[R, R];
-            field = new Field(R);
+            FieldSize = size;
+            B = new Button[FieldSize, FieldSize];
+            field = new Field(FieldSize);
             AddNewButtons();
             InitializeComponent();
         }
 
-
+        // Handling clicks
         private void Game_Click(object sender, EventArgs e) {
             Button temp = (Button)sender;
             (int i, int j) pair = ((int, int))temp.Tag;
@@ -51,15 +52,15 @@ namespace TicTacToe {
 
                 if (field.CheckToWin() != ' ') {
                     TurnLabel.Text = "Победитель: " + field.CheckToWin();
-                    for (int i = 0; i < R; ++i)
-                        for (int j = 0; j < R; ++j)
+                    for (int i = 0; i < FieldSize; ++i)
+                        for (int j = 0; j < FieldSize; ++j)
                             B[i, j].Enabled = false;
                 }
                 else if (!field.CheckToStop()) {
                     TurnLabel.Text = "Ничья!";
                 }
                 else {
-                    // BOT
+
                     if (firstShag) {
                         firstShag = false;
                         NewGameButton.Enabled = true;
@@ -70,12 +71,11 @@ namespace TicTacToe {
                     else {
                         bot = bot.EqualField(field);
                     }
-                    (int i, int j, Node nextNode) p = bot.NextHod();
+                    (int i, int j, Node nextNode) p = bot.NextMove();
                     bot = p.nextNode;
                     field.M[p.i, p.j] = curPlayer;
                     B[p.i, p.j].Text = curPlayer.ToString();
 
-                    // ENDBOT
 
                     if (curPlayer == 'X')
                         curPlayer = 'O';
@@ -85,8 +85,8 @@ namespace TicTacToe {
 
                     if (field.CheckToWin() != ' ') {
                         TurnLabel.Text = "Победитель: " + field.CheckToWin();
-                        for (int i = 0; i < R; ++i)
-                            for (int j = 0; j < R; ++j)
+                        for (int i = 0; i < FieldSize; ++i)
+                            for (int j = 0; j < FieldSize; ++j)
                                 B[i, j].Enabled = false;
                     }
                     else if (!field.CheckToStop()) {
@@ -99,8 +99,8 @@ namespace TicTacToe {
 
         // Create field with new buttons for game
         private void AddNewButtons() {
-            for (int i = 0; i < R; ++i) {
-                for (int j = 0; j < R; ++j) {
+            for (int i = 0; i < FieldSize; ++i) {
+                for (int j = 0; j < FieldSize; ++j) {
                     B[i, j] = new Button {
                         BackColor = Color.LightGray,
                         ForeColor = Color.Black,
@@ -120,8 +120,8 @@ namespace TicTacToe {
 
         // Start new game
         private void NewGame() {
-            for (int i = 0; i < R; ++i) {
-                for (int j = 0; j < R; ++j) {
+            for (int i = 0; i < FieldSize; ++i) {
+                for (int j = 0; j < FieldSize; ++j) {
                     field.M[i, j] = ' ';
                     B[i, j].Text = " ";
                     B[i, j].Enabled = true;
@@ -135,12 +135,9 @@ namespace TicTacToe {
             bot = null;
         }
 
+        // Restart game
         private void NewGameButton_Click(object sender, EventArgs e) {
             NewGame();
-        }
-
-        private void ChangeSizeGameButton_Click(object sender, EventArgs e) {
-            Close();
         }
     }
 }

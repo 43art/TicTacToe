@@ -26,23 +26,24 @@ namespace TicTacToe {
         private void InitializeComponent() {
             this.TurnLabel = new System.Windows.Forms.Label();
             this.NewGameButton = new System.Windows.Forms.Button();
-            this.ChangeSizeGameButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // TurnLabel
             // 
             this.TurnLabel.AutoSize = true;
             this.TurnLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.TurnLabel.Cursor = System.Windows.Forms.Cursors.Default;
             this.TurnLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TurnLabel.Location = new System.Drawing.Point(56, 292);
+            this.TurnLabel.Location = new System.Drawing.Point(85, 333);
             this.TurnLabel.Name = "TurnLabel";
-            this.TurnLabel.Size = new System.Drawing.Size(111, 24);
+            this.TurnLabel.Size = new System.Drawing.Size(135, 24);
             this.TurnLabel.TabIndex = 0;
-            this.TurnLabel.Text = "Ход игрока";
+            this.TurnLabel.Text = "Ход игрока: X";
             // 
             // NewGameButton
             // 
-            this.NewGameButton.Location = new System.Drawing.Point(12, 341);
+            this.NewGameButton.Enabled = false;
+            this.NewGameButton.Location = new System.Drawing.Point(89, 376);
             this.NewGameButton.Name = "NewGameButton";
             this.NewGameButton.Size = new System.Drawing.Size(120, 40);
             this.NewGameButton.TabIndex = 1;
@@ -50,22 +51,11 @@ namespace TicTacToe {
             this.NewGameButton.UseVisualStyleBackColor = true;
             this.NewGameButton.Click += new System.EventHandler(this.NewGameButton_Click);
             // 
-            // ChangeSizeGameButton
-            // 
-            this.ChangeSizeGameButton.Location = new System.Drawing.Point(159, 341);
-            this.ChangeSizeGameButton.Name = "ChangeSizeGameButton";
-            this.ChangeSizeGameButton.Size = new System.Drawing.Size(120, 40);
-            this.ChangeSizeGameButton.TabIndex = 2;
-            this.ChangeSizeGameButton.Text = "Изменить размерность";
-            this.ChangeSizeGameButton.UseVisualStyleBackColor = true;
-            this.ChangeSizeGameButton.Click += new System.EventHandler(this.ChangeSizeGameButton_Click);
-            // 
             // TicTacToe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(291, 393);
-            this.Controls.Add(this.ChangeSizeGameButton);
+            this.ClientSize = new System.Drawing.Size(291, 428);
             this.Controls.Add(this.NewGameButton);
             this.Controls.Add(this.TurnLabel);
             this.Name = "TicTacToe";
@@ -79,6 +69,5 @@ namespace TicTacToe {
 
         private System.Windows.Forms.Label TurnLabel;
         private System.Windows.Forms.Button NewGameButton;
-        private System.Windows.Forms.Button ChangeSizeGameButton;
     }
 }

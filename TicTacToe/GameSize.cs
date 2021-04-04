@@ -23,6 +23,7 @@ namespace TicTacToe {
                 else {
                     TicTacToe game = new TicTacToe(gameSize);
                     game.Show();
+                    Visible = false;
                 }
             }
             catch {

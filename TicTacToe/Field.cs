@@ -9,6 +9,7 @@ namespace TicTacToe {
         public char[,] M;
         public int Size;
 
+        // Init field
         public Field(int size) {
             this.Size = size;
             M = new char[size, size];
@@ -19,29 +20,28 @@ namespace TicTacToe {
             }
         }
 
-        // false - все занято, true - есть место
+        // Check free cell
         public bool CheckToStop() {
-            bool res = false;
+            bool resoult = false;
 
             for (int i = 0; i < Size; ++i) {
                 for (int j = 0; j < Size; ++j) {
                     if (M[i, j] == ' ') {
-                        res = true;
+                        resoult = true;
                         break;
                     }
                 }
-                if (res)
+                if (resoult)
                     break;
             }
-
-            return res;
+            return resoult;
         }
 
-        // ' ' - нет победителя, 'X' | 'O' - победители
+        // Check winner. ' ' - draw, 'X' - X winner, 'O' - O winner
         public char CheckToWin() {
             char result = ' ';
             for (int i = 0; i < Size; ++i) {
-                // Горизонтальные линии
+                // Check horizontal lines
                 result = M[i, 0];
                 for (int j = 0; j < Size; ++j) {
                     if (M[i, j] != result)
@@ -50,7 +50,7 @@ namespace TicTacToe {
                 if (result != ' ')
                     break;
 
-                // Вертикальные линии
+                // Check vertical lines
                 result = M[0, i];
                 for (int j = 0; j < Size; ++j) {
                     if (M[j, i] != result)
@@ -59,7 +59,7 @@ namespace TicTacToe {
                 if (result != ' ')
                     break;
 
-                // Диагональная линия с ЛВ в ПН
+                // Check diagonal lines left top right down
                 result = M[0, 0];
                 for (int j = 0; j < Size; ++j) {
                     if (M[j, j] != result)
@@ -68,7 +68,7 @@ namespace TicTacToe {
                 if (result != ' ')
                     break;
 
-                // Диагональняа линия с ПВ в ЛН
+                // Check diagonal lines left down right top
                 result = M[0, Size - 1];
                 for (int j = 0; j < Size; ++j) {
                     if (M[j, Size - j - 1] != result)
@@ -80,6 +80,7 @@ namespace TicTacToe {
             return result;
         }
 
+        // Copy GameField
         public Field Copy() {
             Field clone = new Field(Size);
             for (int i = 0; i < Size; ++i)
@@ -88,15 +89,16 @@ namespace TicTacToe {
             return clone;
         }
 
-        public bool Raven(Field f) {
-            bool res = true;
+        // Check equal GameFields
+        public bool Equal(Field f) {
+            bool resoult = true;
             for (int i = 0; i < Size; ++i) {
                 for (int j = 0; j < Size; ++j) {
                     if (M[i, j] != f.M[i, j])
-                        res = false;
+                        resoult = false;
                 }
             }
-            return res;
+            return resoult;
         }
     }
 }

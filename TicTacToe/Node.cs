@@ -29,12 +29,10 @@ namespace TicTacToe {
 
         public void ExecuteValue() {
             char ctw = _field.CheckToWin();
-            // Все занято ли
             if (!_field.CheckToStop()) {
                 _value = 0;
             }
             else {
-                // 
                 if (ctw == bot) {
                     _value = 10;
                 }
@@ -87,7 +85,7 @@ namespace TicTacToe {
             }
         }
 
-        public (int, int, Node) NextHod() {
+        public (int, int, Node) NextMove() {
             (int i, int j) bestHod = (-1, -1);
             Node nextNode = null;
             if (_childs.Count > 0) {
@@ -113,7 +111,7 @@ namespace TicTacToe {
         public Node EqualField(Field f) {
             Node res = null;
             foreach (Node node in _childs) {
-                if (node._field.Raven(f))
+                if (node._field.Equal(f))
                     res = node;
             }
             return res;
